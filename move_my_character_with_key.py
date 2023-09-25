@@ -63,13 +63,13 @@ def set_idle_state():
             line = 4
         idle = False
 
-# def isEnd(x, y):
-#     if x < 0 or x > 1280:
-#         return True
-#     if y < 0 or y > 1024:
-#         return True
-#
-#     return False
+def isEnd(x, y):
+    if x < 0 or x > 1280:
+        return True
+    if y < 0 or y > 1024:
+        return True
+
+    return False
 
 
 running, reverse, idle = True, False, True
@@ -84,10 +84,6 @@ while running:
     clear_canvas()
     ground.draw(1280 // 2, 1024 // 2)
 
-    # if isEnd(x, y):
-    #     speed = 0
-    # else:
-    #     speed =10
 
     if reverse:
         character.clip_composite_draw(curframe * 90, frame_column[line], 90, 90, 0, 'h', x, y, 250, 250)
@@ -99,8 +95,10 @@ while running:
     set_idle_state()  # 대기모션 상태 판단
 
     curframe = (curframe + 1) % total_frames[line]
-    x += dirX * speed
-    y += dirY * speed
+
+    if 40 <= x + dirX * speed <= 1230 and 40 <= y + dirY * speed <= 974:
+        x += dirX * speed
+        y += dirY * speed
 
     delay(0.05)
 
