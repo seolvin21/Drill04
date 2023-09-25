@@ -4,7 +4,6 @@ open_canvas(1280, 1024)
 ground = load_image('TUK_GROUND.png')
 character = load_image('FinnJake_SpriteSheet.png')
 
-
 def handle_events():
     global running, reverse, idle
     global x, y, dirX, dirY
