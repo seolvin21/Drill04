@@ -1,5 +1,4 @@
 from pico2d import *
-import random
 
 open_canvas(1280, 1024)
 ground = load_image('TUK_GROUND.png')
@@ -16,7 +15,7 @@ def handle_events():
         if event.type == SDL_QUIT:
             running = False
         elif event.type == SDL_KEYDOWN:
-            line=0
+            line = 0
             if event.key == SDLK_RIGHT:
                 dirX += 1
                 line, reverse = 2, False
@@ -46,7 +45,7 @@ def set_idle_state():
     global line, idle
 
     if dirX == 0 and dirY == 0:
-        if curframe+1 >= total_frames[line]:
+        if curframe + 1 >= total_frames[line]:
             line = 1
 
         idle = True
@@ -63,15 +62,6 @@ def set_idle_state():
             line = 4
         idle = False
 
-def isEnd(x, y):
-    if x < 0 or x > 1280:
-        return True
-    if y < 0 or y > 1024:
-        return True
-
-    return False
-
-
 running, reverse, idle = True, False, True
 x, y = 800 // 2, 600 // 2
 dirX, dirY, speed = 0, 0, 10
@@ -83,7 +73,6 @@ total_frames = [20, 12, 16, 11, 12]
 while running:
     clear_canvas()
     ground.draw(1280 // 2, 1024 // 2)
-
 
     if reverse:
         character.clip_composite_draw(curframe * 90, frame_column[line], 90, 90, 0, 'h', x, y, 250, 250)
@@ -99,6 +88,8 @@ while running:
     if 40 <= x + dirX * speed <= 1230 and 40 <= y + dirY * speed <= 974:
         x += dirX * speed
         y += dirY * speed
+    else:
+        break
 
     delay(0.05)
 
